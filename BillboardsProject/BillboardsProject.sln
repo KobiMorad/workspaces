@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BillboardsProject", "BillboardsProject\BillboardsProject.csproj", "{632DB383-5A7C-4BBA-B082-7B761D1A7B52}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Billboards.Common", "Billboards.Common\Billboards.Common.csproj", "{592475EE-FE30-4A0B-81FD-AF7F01B48AFB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{632DB383-5A7C-4BBA-B082-7B761D1A7B52}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{632DB383-5A7C-4BBA-B082-7B761D1A7B52}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{632DB383-5A7C-4BBA-B082-7B761D1A7B52}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{632DB383-5A7C-4BBA-B082-7B761D1A7B52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{592475EE-FE30-4A0B-81FD-AF7F01B48AFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{592475EE-FE30-4A0B-81FD-AF7F01B48AFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{592475EE-FE30-4A0B-81FD-AF7F01B48AFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{592475EE-FE30-4A0B-81FD-AF7F01B48AFB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

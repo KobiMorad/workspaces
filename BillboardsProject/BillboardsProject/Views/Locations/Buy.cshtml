@@ -1,0 +1,32 @@
+﻿@model Billboards.Common.Models.LocationModel
+
+@{
+    ViewBag.Title = "Buy";
+}
+
+<h2>Buy</h2>
+
+
+<fieldset>
+    <legend>LocationModel</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Discription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Discription)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.IsAvailable)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsAvailable)
+    </div>
+
+    <button id="addItem" class="addItem">fgfdgfd</button>
+
+</fieldset>
+<p> 
+    @Html.ActionLink("Back to List", "ShowAll")
+</p>

@@ -1,0 +1,54 @@
+﻿@model BillboardsProject.ViewModels.BillboardViewModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('form').submit(function () {
+            $('button').attr('disabled', true).text('Please wait ...');
+        });
+    })
+       
+</script>
+
+<fieldset>
+    <legend>BillboardViewModel</legend>
+
+    @using (Html.BeginForm("Create", "Billboards", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    { 
+        <div class="editor-label" style="animation: ease-in; animation-delay: 4s; animation-play-state: running">
+            @Html.LabelFor(model => model.Description)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+            
+        <div>Please select some files</div>
+            
+        <div class="editor-row">
+            <div class="editor-label">
+
+                @Html.LabelFor(model => model.File)
+            </div>
+            <div class="editor-field">
+                @Html.FileFor(model => model.File)
+            </div>
+        </div>
+        <button type="submit">Create</button>  
+                  
+    }
+</fieldset>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

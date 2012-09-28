@@ -42,13 +42,17 @@
     <Compile Include="Models\Billboard.cs" />
     <Compile Include="Models\LLA.cs" />
     <Compile Include="Models\LocationModel.cs" />
+    <Compile Include="Models\OrderDetailModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Billboard\BillboardService.cs" />
     <Compile Include="Service\Billboard\IBillboardsService.cs" />
     <Compile Include="Service\ILocationsService.cs" />
+    <Compile Include="Service\IOrdersService.cs" />
+    <Compile Include="Service\IPaymentService.cs" />
     <Compile Include="Service\IServiceLocator.cs" />
     <Compile Include="Service\Locations.cs" />
     <Compile Include="Service\LocationService.cs" />
+    <Compile Include="Service\OrdersService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

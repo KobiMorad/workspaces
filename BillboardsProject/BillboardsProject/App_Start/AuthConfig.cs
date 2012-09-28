@@ -22,9 +22,9 @@ namespace BillboardsProject
             //    consumerKey: "",
             //    consumerSecret: "");
 
-            //OAuthWebSecurity.RegisterFacebookClient(
-            //    appId: "",
-            //    appSecret: "");
+            OAuthWebSecurity.RegisterFacebookClient(
+                appId: "282900211821321",
+                appSecret: "9e974a2933237771fdc08365e9771724");
 
             //OAuthWebSecurity.RegisterGoogleClient();
         }

@@ -53,9 +53,9 @@ window.Modernizr = (function( window, document, undefined ) {
     prefixes = ' -webkit- -moz- -o- -ms- '.split(' '),
 
     // Following spec is to expose vendor-specific style properties as:
-    //   elem.style.WebkitBorderRadius
+    //   elem.style.WebkitBOrderAsyncRadius
     // and the following would be incorrect:
-    //   elem.style.webkitBorderRadius
+    //   elem.style.webkitBOrderAsyncRadius
 
     // Webkit ghosts their properties in lowercase but Opera & Moz do not.
     // Microsoft uses a lowercase `ms` instead of the correct `Ms` in IE8+
@@ -92,7 +92,7 @@ window.Modernizr = (function( window, document, undefined ) {
           fakeBody = body ? body : document.createElement('body');
 
       if ( parseInt(nodes, 10) ) {
-          // In order not to give false positives we create a node for each test
+          // In OrderAsync not to give false positives we create a node for each test
           // This also allows the method to scale for unspecified uses
           while ( nodes-- ) {
               node = document.createElement('div');
@@ -457,10 +457,10 @@ window.Modernizr = (function( window, document, undefined ) {
     };
 
     /**
-     * geolocation tests for the new Geolocation API specification.
+     * geoLocationId tests for the new GeoLocationId API specification.
      *   This test is a standards compliant-only test; for more complete
      *   testing, including a Google Gears fallback, please see:
-     *   code.google.com/p/geo-location-javascript/
+     *   code.google.com/p/geo-LocationId-javascript/
      * or view a fallback solution using google's geo API:
      *   gist.github.com/366184
      */
@@ -571,15 +571,15 @@ window.Modernizr = (function( window, document, undefined ) {
     };
 
     tests['borderimage'] = function() {
-        return testPropsAll('borderImage');
+        return testPropsAll('bOrderAsyncImage');
     };
 
 
     // Super comprehensive table about all the unique implementations of
-    // border-radius: muddledramblings.com/table-of-css3-border-radius-compliance
+    // bOrderAsync-radius: muddledramblings.com/table-of-css3-bOrderAsync-radius-compliance
 
     tests['borderradius'] = function() {
-        return testPropsAll('borderRadius');
+        return testPropsAll('bOrderAsyncRadius');
     };
 
     // WebOS unfortunately false positives on this test.
@@ -1190,10 +1190,10 @@ window.Modernizr = (function( window, document, undefined ) {
     Modernizr._domPrefixes  = domPrefixes;
     Modernizr._cssomPrefixes  = cssomPrefixes;
     
-    // Modernizr.mq tests a given media query, live against the current state of the window
+    // Modernizr.mq tests a given media query, live against the current Start of the window
     // A few important notes:
     //   * If a browser does not support media queries at all (eg. oldIE) the mq() will always return false
-    //   * A max-width or orientation query will be evaluated against the current state, which may change later.
+    //   * A max-width or orientation query will be evaluated against the current Start, which may change later.
     //   * You must specify values. Eg. If you are testing support for the min-width media query use: 
     //       Modernizr.mq('(min-width:0)')
     // usage:

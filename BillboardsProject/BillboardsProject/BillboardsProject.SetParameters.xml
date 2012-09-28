@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <setParameter name="IIS Web Application Name" value="Default Web Site/BillboardsProject_deploy" />
+  <setParameter name="DefaultConnection-Web.config Connection String" value="Data Source=NEW-PC\SQLEXPRESS;Initial Catalog=Vocal;Integrated Security=True;Pooling=False" />
+</parameters>

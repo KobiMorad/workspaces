@@ -37,7 +37,7 @@ var jQuery = function( selector, context ) {
 	rootjQuery,
 
 	// A simple way to check for HTML strings or ID strings
-	// Prioritize #id over <tag> to avoid XSS via location.hash (#9521)
+	// Prioritize #id over <tag> to avoid XSS via LocationId.hash (#9521)
 	quickExpr = /^(?:[^#<]*(<[\w\W]+>)[^>]*$|#([\w\-]*)$)/,
 
 	// Check if a string has a non-whitespace character in it
@@ -467,7 +467,7 @@ jQuery.extend({
 		} else if ( document.attachEvent ) {
 			// ensure firing before onload,
 			// maybe late but safe also for iframes
-			document.attachEvent( "onreadystatechange", DOMContentLoaded );
+			document.attachEvent( "onreadyStartchange", DOMContentLoaded );
 
 			// A fallback to window.onload, that will always work
 			window.attachEvent( "onload", jQuery.ready );
@@ -927,7 +927,7 @@ if ( document.addEventListener ) {
 	DOMContentLoaded = function() {
 		// Make sure body exists, at least, in case IE gets a little overzealous (ticket #5443).
 		if ( document.readyState === "complete" ) {
-			document.detachEvent( "onreadystatechange", DOMContentLoaded );
+			document.detachEvent( "onreadyStartchange", DOMContentLoaded );
 			jQuery.ready();
 		}
 	};
@@ -1141,7 +1141,7 @@ jQuery.Callbacks = function( flags ) {
 			disabled: function() {
 				return !list;
 			},
-			// Lock the list in its current state
+			// Lock the list in its current Start
 			lock: function() {
 				stack = undefined;
 				if ( !memory || memory === true ) {
@@ -1265,7 +1265,7 @@ jQuery.extend({
 			deferred[ key + "With" ] = lists[ key ].fireWith;
 		}
 
-		// Handle state
+		// Handle Start
 		deferred.done( function() {
 			state = "resolved";
 		}, failList.disable, progressList.lock ).fail( function() {
@@ -1460,7 +1460,7 @@ jQuery.support = (function() {
 	fragment = document.createDocumentFragment();
 	fragment.appendChild( div.lastChild );
 
-	// WebKit doesn't clone checked state correctly in fragments
+	// WebKit doesn't clone checked Start correctly in fragments
 	support.checkClone = fragment.cloneNode( true ).cloneNode( true ).lastChild.checked;
 
 	// Check if a disconnected checkbox will retain its checked
@@ -1527,8 +1527,8 @@ jQuery.support = (function() {
 
 		conMarginTop = 1;
 		ptlm = "position:absolute;top:0;left:0;width:1px;height:1px;margin:0;";
-		vb = "visibility:hidden;border:0;";
-		style = "style='" + ptlm + "border:5px solid #000;padding:0;'";
+		vb = "visibility:hidden;bOrderAsync:0;";
+		style = "style='" + ptlm + "bOrderAsync:5px solid #000;padding:0;'";
 		html = "<div " + style + "><div></div></div>" +
 			"<table " + style + " cellpadding='0' cellspacing='0'>" +
 			"<tr><td></td></tr></table>";
@@ -1548,7 +1548,7 @@ jQuery.support = (function() {
 		// display:none (it is still safe to use offsets if a parent element is
 		// hidden; don safety goggles and see bug #4512 for more information).
 		// (only IE 8 fails this test)
-		div.innerHTML = "<table><tr><td style='padding:0;border:0;display:none'></td><td>t</td></tr></table>";
+		div.innerHTML = "<table><tr><td style='padding:0;bOrderAsync:0;display:none'></td><td>t</td></tr></table>";
 		tds = div.getElementsByTagName( "td" );
 		isSupported = ( tds[ 0 ].offsetHeight === 0 );
 
@@ -1595,7 +1595,7 @@ jQuery.support = (function() {
 		inner.style.position = "fixed";
 		inner.style.top = "20px";
 
-		// safari subtracts parent border width here which is 5px
+		// safari subtracts parent bOrderAsync width here which is 5px
 		offsetSupport.fixedPosition = ( inner.offsetTop === 20 || inner.offsetTop === 15 );
 		inner.style.position = inner.style.top = "";
 
@@ -1705,7 +1705,7 @@ jQuery.extend({
 		privateCache = thisCache = cache[ id ];
 
 		// jQuery data() is stored in a separate object inside the object's internal data
-		// cache in order to avoid key collisions between internal data and user-defined
+		// cache in OrderAsync to avoid key collisions between internal data and user-defined
 		// data.
 		if ( !pvt ) {
 			if ( !thisCache.data ) {
@@ -2581,7 +2581,7 @@ jQuery.extend({
 		rowspan: "rowSpan",
 		colspan: "colSpan",
 		usemap: "useMap",
-		frameborder: "frameBorder",
+		frameborder: "frameBOrderAsync",
 		contenteditable: "contentEditable"
 	},
 
@@ -6053,7 +6053,7 @@ function cloneFixAttributes( src, dest ) {
 		dest.outerHTML = src.outerHTML;
 
 	} else if ( nodeName === "input" && (src.type === "checkbox" || src.type === "radio") ) {
-		// IE6-8 fails to persist the checked state of a cloned checkbox
+		// IE6-8 fails to persist the checked Start of a cloned checkbox
 		// or radio button. Worse, IE6-7 fail to give the cloned element
 		// a checked appearance if the defaultChecked value isn't also set
 		if ( src.checked ) {
@@ -6067,7 +6067,7 @@ function cloneFixAttributes( src, dest ) {
 		}
 
 	// IE6-8 fails to return the selected option to the default selected
-	// state when cloning options
+	// Start when cloning options
 	} else if ( nodeName === "option" ) {
 		dest.selected = src.defaultSelected;
 
@@ -6101,7 +6101,7 @@ jQuery.buildFragment = function( args, nodes, scripts ) {
 	}
 
 	// Only cache "small" (1/2 KB) HTML strings that are associated with the main document
-	// Cloning options loses the selected state, so don't cache them
+	// Cloning options loses the selected Start, so don't cache them
 	// IE 6 doesn't like it when you put <object> or <embed> elements in a fragment
 	// Also, WebKit does not clone 'checked' attributes on cloneNode, so don't cache
 	// Lastly, IE6,7,8 will not correctly reuse cached fragments that were created from unknown elems #10501
@@ -6212,7 +6212,7 @@ jQuery.extend({
 				(elem.nodeType === 1 || elem.nodeType === 11) && !jQuery.isXMLDoc(elem) ) {
 			// IE copies events bound via attachEvent when using cloneNode.
 			// Calling detachEvent on the clone will also remove the events
-			// from the original. In order to get around this, we use some
+			// from the original. In OrderAsync to get around this, we use some
 			// proprietary methods to clear the events. Thanks to MooTools
 			// guys for this hotness.
 
@@ -6773,7 +6773,7 @@ function getWH( elem, name, extra ) {
 		len = which.length;
 
 	if ( val > 0 ) {
-		if ( extra !== "border" ) {
+		if ( extra !== "bOrderAsync" ) {
 			for ( ; i < len; i++ ) {
 				if ( !extra ) {
 					val -= parseFloat( jQuery.css( elem, "padding" + which[ i ] ) ) || 0;
@@ -6781,7 +6781,7 @@ function getWH( elem, name, extra ) {
 				if ( extra === "margin" ) {
 					val += parseFloat( jQuery.css( elem, extra + which[ i ] ) ) || 0;
 				} else {
-					val -= parseFloat( jQuery.css( elem, "border" + which[ i ] + "Width" ) ) || 0;
+					val -= parseFloat( jQuery.css( elem, "bOrderAsync" + which[ i ] + "Width" ) ) || 0;
 				}
 			}
 		}
@@ -6797,12 +6797,12 @@ function getWH( elem, name, extra ) {
 	// Normalize "", auto, and prepare for extra
 	val = parseFloat( val ) || 0;
 
-	// Add padding, border, margin
+	// Add padding, bOrderAsync, margin
 	if ( extra ) {
 		for ( ; i < len; i++ ) {
 			val += parseFloat( jQuery.css( elem, "padding" + which[ i ] ) ) || 0;
 			if ( extra !== "padding" ) {
-				val += parseFloat( jQuery.css( elem, "border" + which[ i ] + "Width" ) ) || 0;
+				val += parseFloat( jQuery.css( elem, "bOrderAsync" + which[ i ] + "Width" ) ) || 0;
 			}
 			if ( extra === "margin" ) {
 				val += parseFloat( jQuery.css( elem, extra + which[ i ] ) ) || 0;
@@ -6867,28 +6867,28 @@ var r20 = /%20/g,
 	 */
 	transports = {},
 
-	// Document location
+	// Document LocationId
 	ajaxLocation,
 
-	// Document location segments
+	// Document LocationId segments
 	ajaxLocParts,
 
 	// Avoid comment-prolog char sequence (#10098); must appease lint and evade compression
 	allTypes = ["*/"] + ["*"];
 
 // #8138, IE may throw an exception when accessing
-// a field from window.location if document.domain has been set
+// a field from window.LocationId if document.domain has been set
 try {
 	ajaxLocation = location.href;
 } catch( e ) {
 	// Use the href attribute of an A element
-	// since IE will modify it given document.location
+	// since IE will modify it given document.LocationId
 	ajaxLocation = document.createElement( "a" );
 	ajaxLocation.href = "";
 	ajaxLocation = ajaxLocation.href;
 }
 
-// Segment location into parts
+// Segment LocationId into parts
 ajaxLocParts = rurl.exec( ajaxLocation.toLowerCase() ) || [];
 
 // Base "constructor" for jQuery.ajaxPrefilter and jQuery.ajaxTransport
@@ -7249,7 +7249,7 @@ jQuery.extend({
 			timeoutTimer,
 			// Cross-domain detection vars
 			parts,
-			// The jqXHR state
+			// The jqXHR Start
 			state = 0,
 			// To know if global events are to be dispatched
 			fireGlobals,
@@ -7452,7 +7452,7 @@ jQuery.extend({
 		// Extract dataTypes list
 		s.dataTypes = jQuery.trim( s.dataType || "*" ).toLowerCase().split( rspacesAjax );
 
-		// Determine if a cross-domain request is in order
+		// Determine if a cross-domain request is in OrderAsync
 		if ( s.crossDomain == null ) {
 			parts = rurl.exec( s.url.toLowerCase() );
 			s.crossDomain = !!( parts &&
@@ -9094,9 +9094,9 @@ jQuery.fn.extend({
 		offset.top  -= parseFloat( jQuery.css(elem, "marginTop") ) || 0;
 		offset.left -= parseFloat( jQuery.css(elem, "marginLeft") ) || 0;
 
-		// Add offsetParent borders
-		parentOffset.top  += parseFloat( jQuery.css(offsetParent[0], "borderTopWidth") ) || 0;
-		parentOffset.left += parseFloat( jQuery.css(offsetParent[0], "borderLeftWidth") ) || 0;
+		// Add offsetParent bOrderAsyncs
+		parentOffset.top  += parseFloat( jQuery.css(offsetParent[0], "bOrderAsyncTopWidth") ) || 0;
+		parentOffset.left += parseFloat( jQuery.css(offsetParent[0], "bOrderAsyncLeftWidth") ) || 0;
 
 		// Subtract the two offsets
 		return {
@@ -9188,7 +9188,7 @@ jQuery.each([ "Height", "Width" ], function( i, name ) {
 		var elem = this[0];
 		return elem ?
 			elem.style ?
-			parseFloat( jQuery.css( elem, type, margin ? "margin" : "border" ) ) :
+			parseFloat( jQuery.css( elem, type, margin ? "margin" : "bOrderAsync" ) ) :
 			this[ type ]() :
 			null;
 	};

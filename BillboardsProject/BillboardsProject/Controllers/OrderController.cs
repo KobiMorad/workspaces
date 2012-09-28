@@ -9,10 +9,5 @@ namespace BillboardsProject.Controllers
     public class OrderController : Controller
     {
      
-        public ActionResult Order()
-        {
-            return View();
-        }
-
     }
 }

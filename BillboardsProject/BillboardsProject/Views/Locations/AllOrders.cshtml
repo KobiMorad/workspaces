@@ -1,0 +1,55 @@
+﻿@model Billboards.Common.Service.IOrdersService
+
+@*@{*@
+@*    ViewBag.Title = "AllOrders";*@
+@*}*@
+
+<h2>AllOrders</h2>
+
+<p>
+
+
+
+    @foreach (var item in Model)
+    {
+        
+        <table style="border: lightslategrey;">
+            <tr>
+                <th>Order id : @item.Key.OrderId
+                </th>
+
+                <th>Date :@item.Key.OrderDate
+                </th>
+            </tr>
+
+            <tr>
+                <th>Begin
+                </th>
+                <th>Stop 
+                </th>
+                <th>Total
+                </th>
+            </tr>
+            
+            @foreach (var row in item.Value)
+            {                
+                <tr>
+                    <td>
+                        @Html.DisplayFor(p => row.Start);
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(p => row.Start);
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(p => row.Total);
+                    </td>
+                </tr>
+            }
+
+        </table>
+      
+    }
+
+</p>

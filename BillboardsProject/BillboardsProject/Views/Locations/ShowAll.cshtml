@@ -1,73 +1,70 @@
-﻿@model System.Collections.Generic.List<BillboardsProject.ViewModels.LocationViewModel>
+﻿@model List<BillboardsProject.ViewModels.LocationViewModel>
 
 @{
-    ViewBag.Title = "ShowAll";
+
 }
+<style type="text/css">
+    .display-label
+    {
+        background: lightsteelblue;
+        font-size: larger;
+    }
+
+    .display-field
+    {
+        font-size: small;
+    }
+ 
+</style>
 
 <h2>ShowAll</h2>
 
-<script src="@Url.Content("~/Scripts/knockout-2.0.0.js")" type="text/javascript"></script>
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <meta name="viewport" content="width=device-width" />
-    <script type="text/javascript">
-      var ge; 
-      var viewModel; // Our knockout.js model
-      google.load("earth", "1");
-      google.load("maps", "2");
- 
-      function init() {
-          google.earth.createInstance('map3d', initCB, failureCB);
-      }
- 
-      function initCB(instance) {
-          ge = instance;
-          ge.getWindow().setVisibility(true);
-          ge.getNavigationControl().setVisibility(ge.VISIBILITY_SHOW);
-          // Create an initial Look of the earth
-          var la = ge.createLookAt('');
-          la.set(@Model[0].Position.Laltitude, @Model[0].Position.Longtitude, 0, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 2000);
-          ge.getView().setAbstractView(la);
-          viewModel = {
-              CoffeeLocations: ko.observableArray([])
-          };
-          ko.applyBindings(viewModel);
-          // Add the polygon stored in the database
-          AddPolygon();
-          // Search and show all coffee shops as placemarks
-          GetCoffeeLocations();
-          // Listen for mousemove on the globe.
-          google.earth.addEventListener(ge.getGlobe(), 'mouseup', function (event) {
-              event.preventDefault();
-              getPolygonBorder().getCoordinates().pushLatLngAlt(event.getLatitude(), event.getLongitude(), 100);
-          });
-      }
- 
-      function failureCB(errorCode) {
-      }
- 
-       function flyToLocation() {
-        var geocodeLocation = document.getElementById('Location').value;
-        var geocoder = new google.maps.ClientGeocoder();
-        geocoder.getLatLng(geocodeLocation, function(point) {
-        if (point) {
-          var lookAt = ge.createLookAt('');
-          lookAt.set(point.y, point.x, 10, ge.ALTITUDE_RELATIVE_TO_GROUND, -8.541, 66.213, 2000);
-          ge.getView().setAbstractView(lookAt);
-        }
-      });
-    }
- 
-      google.setOnLoadCallback(init);
-  </script>
-  <script src="@Url.Content("~/Scripts/EarthFunctions.js")" type="text/javascript"></script>
-  <script src="@Url.Content("~/Scripts/PlacesFunctions.js")" type="text/javascript"></script>
-
 <fieldset>
+    <legend>LocationViewModel</legend>
 
-  <div id="map3d" style="height: 700px; width: 100%;"></div>
-   
+    <ul>
+        @foreach (var item in Model)
+        {      
+            <ul style="margin-bottom: 65px">
+                <p>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => item.Discription)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => item.Discription)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => item.Price)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => item.Price)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => item.InLockState)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => item.InLockState)
+                    </div>
+
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => item.IsAvailable)
+                    </div>
+                    <div class="display-field">
+                        @Html.DisplayFor(model => item.IsAvailable)
+                    </div>
+
+                    @Html.HiddenFor(model => item.Id)
+
+                    @Html.ActionLink("Open", "ShowLocationInfo", item, null);
+                                     
+                    <br />
+                </p>
+
+            </ul>
+         
+        }
+    </ul>
 </fieldset>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+

@@ -1,30 +1,38 @@
-﻿using Billboards.Common.Models;
+﻿using System.ComponentModel;
+using System.Web.Mvc;
+using Billboards.Common.Models;
 using System.ComponentModel.DataAnnotations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using BillboardsProject.Convertes;
 
 namespace BillboardsProject.ViewModels
 {
     public class LocationViewModel
-    {       
+    {   
+        [HiddenInput]
+        public string Id { get; set; }
+
         [DataType(DataType.MultilineText)]
-        public string Discription { get; set; }
-        
-        [DataType(DataType.Custom)]
-        public LLA Position { get; set; }
-        
-        [DataType(DataType.Currency)]
-        public double Price { get; set; }   
-     
-        public LocationViewModel (LocationModel model)
+        public string Discription { get; set; }        
+        public double Longtitude { get; set; }       
+        public double Laltitude { get; set; }       
+        public double Price { get; set; }
+        public bool InLockState { get; set; }
+        public bool IsAvailable { get; set; }
+
+        public LocationViewModel()
         {
-            Discription = model.Discription;
-            Position = model.Position;
-            Price = model.Price;
+
         }
-	
-        
+
+        public LocationViewModel(LocationModel model)
+        {
+            Id = model.Id;
+            InLockState = model.InLockState;
+            IsAvailable = model.IsAvailable;
+            Discription = model.Discription;
+            Laltitude = model.Position.Laltitude;
+            Longtitude = model.Position.Longtitude;
+            Price = model.PricePerDay;
+        }       
     }
 }

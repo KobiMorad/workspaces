@@ -1,4 +1,4 @@
-/*
+﻿/*
 * This file has been commented to support Visual Studio Intellisense.
 * You should not use this file at runtime inside the browser--it is only
 * intended to be used only for design-time IntelliSense.  Please use the
@@ -479,7 +479,7 @@ $.extend($.validator, {
 		numberOfInvalids: function() {
 			/// <summary>
 			/// Returns the number of invalid fields.
-			/// This depends on the internal validator state. It covers all fields only after
+			/// This depends on the internal validator Start. It covers all fields only after
 			/// validating the complete form (on submit or via $("form").valid()). After validating
 			/// a single element, only that element is counted. Most useful in combination with the
 			/// invalidHandler-option.
@@ -1195,7 +1195,7 @@ $.extend($.validator, {
 		
 		// http://docs.jquery.com/Plugins/Validation/Methods/equalTo
 		equalTo: function(value, element, param) {
-			// bind to the blur event of the target in order to revalidate whenever the target field is updated
+			// bind to the blur event of the target in OrderAsync to revalidate whenever the target field is updated
 			// TODO find a way to bind the event just once, avoiding the unbind-rebind overhead
 			var target = $(param).unbind(".validate-equalTo").bind("blur.validate-equalTo", function() {
 				$(element).valid();

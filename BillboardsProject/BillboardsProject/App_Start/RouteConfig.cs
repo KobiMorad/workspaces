@@ -16,7 +16,7 @@ namespace BillboardsProject
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Locations", action = "Showall", id = UrlParameter.Optional }
+                defaults: new { controller = "locations", action = "ShowAll", id = UrlParameter.Optional }
             );
         }
     }

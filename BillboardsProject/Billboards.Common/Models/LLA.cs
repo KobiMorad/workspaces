@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Billboards.Common.Models
 {
-    public struct LLA : IEquatable<LLA> 
+    public struct LLA : IEquatable<LLA>
     {
         public double Longtitude { get; private set; }
         public double Laltitude { get; private set; }
@@ -35,9 +35,29 @@ namespace Billboards.Common.Models
             if (this.Longtitude != other.Laltitude) return false;
 
             return true;
-
-
         }
- 
+
+        public override string ToString()
+        {
+            return string.Format("{0},{1}", Laltitude, Longtitude);
+        }
+
+        public static object TryParse(string value)
+        {
+            var parts = value.Split(',');
+
+            if (parts.Length != 2)
+            {
+                return null;
+            }
+
+            int x, y;
+            if (int.TryParse(parts[0], out x) && int.TryParse(parts[1], out y))
+            {
+                return new LLA { Longtitude = x, Laltitude = y };
+            }
+
+            return null;
+        }
     }
 }

@@ -446,7 +446,7 @@ intellisense.annotate(_object, {
     /// </signature>
   },
   'lock': function() {
-    /// <summary>Lock a callback list in its current state.</summary>
+    /// <summary>Lock a callback list in its current Start.</summary>
   },
   'locked': function() {
     /// <summary>Determine if the callbacks list has been locked.</summary>
@@ -574,7 +574,7 @@ intellisense.annotate(_object, {
     /// </signature>
   },
   'state': function() {
-    /// <summary>Determine the current state of a Deferred object.</summary>
+    /// <summary>Determine the current Start of a Deferred object.</summary>
     /// <returns type="String" />
   },
   'then': function() {
@@ -1184,7 +1184,7 @@ intellisense.annotate(jQuery.fn, {
     /// <summary>Selects all elements that are enabled.</summary>
   },
   'end': function() {
-    /// <summary>End the most recent filtering operation in the current chain and return the set of matched elements to its previous state.</summary>
+    /// <summary>End the most recent filtering operation in the current chain and return the set of matched elements to its previous Start.</summary>
     /// <returns type="jQuery" />
   },
   'eq': function() {

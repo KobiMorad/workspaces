@@ -1,0 +1,58 @@
+﻿@model BillboardsProject.ViewModels.LocationViewModel
+
+@{
+   
+}
+
+
+
+@*<script type="text/javascript">*@
+@**@
+@*    $.noConflict();*@
+@**@
+@*    $(function () {*@
+@**@
+@*        var x = $("#datebox");*@
+@*        x.datepicker();*@
+@*    });*@
+@**@
+@*</script>*@
+<h2>ShowLocationInfo</h2>
+
+
+
+<fieldset>
+    <legend>LocationViewModel</legend>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Discription)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Discription)
+    </div>
+
+    <div class="display-label">
+        @Html.DisplayNameFor(model => model.Price)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Price)
+    </div>
+
+    <div>
+        <div>Laltitude</div>
+        @Html.DisplayFor(model => model.Laltitude);        
+    </div>
+
+    <div>
+        <div>Longtitude</div>
+        @Html.DisplayFor(model => model.Longtitude);        
+    </div>
+
+
+
+
+    @Html.ActionLink("Add to cart", "AddToCart", Model);
+    @Html.ActionLink("Buy", "Buy", Model);
+      @Html.ActionLink("Go to cart", "Cart");
+
+</fieldset>

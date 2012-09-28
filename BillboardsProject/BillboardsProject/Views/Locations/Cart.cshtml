@@ -1,0 +1,76 @@
+﻿@model IEnumerable<KeyValuePair<BillboardsProject.ViewModels.OrderDetailViewModel, BillboardsProject.ViewModels.LocationViewModel>>
+
+
+
+
+<ul id="t">
+    @foreach (var item in Model)
+    {
+        <h2>
+            <div style="font-size: medium">
+                <li>
+                    <div class="display-label">
+                        @Html.DisplayNameFor(model => model.Key.End)
+                    </div>
+                    @Html.DisplayTextFor(m => item.Key.Start)
+                </li>
+                o
+                <li>
+                    <div class="display-label">
+                        @Html.DisplayNameFor((m) => m.Key.End)
+                    </div>
+
+                    @Html.DisplayTextFor(m => item.Key.End)
+                </li>
+                <li>
+                    <div class="display-label">
+                        @Html.DisplayNameFor((m) => m.Key.Total)
+                    </div>
+
+                    @Html.DisplayTextFor(m => item.Key.Total)
+                </li>
+            </div>
+            <section style="font-size: small">
+                <ul>
+                    <li>
+                        <div class="display-label">
+                            @Html.DisplayNameFor((m) => m.Value.Discription)
+                        </div>
+
+                        @Html.DisplayTextFor(m => item.Value.Discription)
+                    </li>
+                    <li>
+                        <div class="display-label">
+                            @Html.DisplayNameFor((m) => m.Value.Price)
+                        </div>
+
+                        @Html.DisplayTextFor(m => item.Value.Price)
+                    </li>
+                    <li>
+                        <div class="display-label">
+                            @Html.DisplayNameFor((m) => m.Value.Laltitude)
+                        </div>
+
+                        @Html.DisplayTextFor(m => item.Value.Laltitude)
+                    </li>
+
+                    <li>
+                        <div class="display-label">
+                            @Html.DisplayNameFor((m) => m.Value.Longtitude)
+                        </div>
+
+                        @Html.DisplayTextFor(m => item.Value.Longtitude)
+                    </li>
+                    <li>
+                         @Html.ActionLink("Remove", "RemoveFromCart", item.Key.LocationId);
+                    </li>
+                </ul>
+            </section>
+            @*            //<%= Ajax.ActionLink("Manage Users", "tabsUsers", null, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "ManageUsersPartial", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { data_target = "#tabs-users" })%> *@
+            @Ajax.ActionLink("Remove","RemoveFromCart","locations" ,item.Key.LocationId,new AjaxOptions(){UpdateTargetId = "t"})
+
+        </h2>
+    }
+</ul>
+
+<h2>Cart</h2>

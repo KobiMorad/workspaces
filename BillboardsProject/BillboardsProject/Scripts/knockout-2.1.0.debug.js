@@ -262,8 +262,8 @@ ko.utils = new (function () {
             if (!mustUseAttachEvent && typeof jQuery != "undefined") {
                 if (isClickOnCheckableElement(element, eventType)) {
                     // For click events on checkboxes, jQuery interferes with the event handling in an awkward way:
-                    // it toggles the element checked state *after* the click event handlers run, whereas native
-                    // click events toggle the checked state *before* the event handler.
+                    // it toggles the element checked Start *after* the click event handlers run, whereas native
+                    // click events toggle the checked Start *before* the event handler.
                     // Fix this by intecepting the handler and applying the correct checkedness before it runs.
                     var originalHandler = handler;
                     handler = function(event, eventData) {
@@ -271,7 +271,7 @@ ko.utils = new (function () {
                         if (eventData)
                             this.checked = eventData.checkedStateBeforeEvent !== true;
                         originalHandler.call(this, event);
-                        this.checked = jQuerySuppliedCheckedState; // Restore the state jQuery applied
+                        this.checked = jQuerySuppliedCheckedState; // Restore the Start jQuery applied
                     };
                 }
                 jQuery(element)['bind'](eventType, handler);
@@ -292,7 +292,7 @@ ko.utils = new (function () {
             if (typeof jQuery != "undefined") {
                 var eventData = [];
                 if (isClickOnCheckableElement(element, eventType)) {
-                    // Work around the jQuery "click events on checkboxes" issue described above by storing the original checked state before triggering the handler
+                    // Work around the jQuery "click events on checkboxes" issue described above by storing the original checked Start before triggering the handler
                     eventData.push({ checkedStateBeforeEvent: element.checked });
                 }
                 jQuery(element)['trigger'](eventType, eventData);
@@ -306,7 +306,7 @@ ko.utils = new (function () {
                 else
                     throw new Error("The supplied element doesn't support dispatchEvent");
             } else if (typeof element.fireEvent != "undefined") {
-                // Unlike other browsers, IE doesn't change the checked state of checkboxes/radiobuttons when you trigger their "click" event
+                // Unlike other browsers, IE doesn't change the checked Start of checkboxes/radiobuttons when you trigger their "click" event
                 // so to make it consistent, we'll do it manually here
                 if (isClickOnCheckableElement(element, eventType))
                     element.checked = element.checked !== true;
@@ -1613,7 +1613,7 @@ ko.exportSymbol('jsonExpressionRewriting.insertPropertyAccessorsIntoJson', ko.js
 (function() {
     // "Virtual elements" is an abstraction on top of the usual DOM API which understands the notion that comment nodes
     // may be used to represent hierarchy (in addition to the DOM's natural hierarchy).
-    // If you call the DOM-manipulating functions on ko.virtualElements, you will be able to read and write the state
+    // If you call the DOM-manipulating functions on ko.virtualElements, you will be able to read and write the Start
     // of that virtual hierarchy
     //
     // The point of all this is to support containerless templates (e.g., <!-- ko foreach:someCollection -->blah<!-- /ko -->)
@@ -2328,7 +2328,7 @@ ko.bindingHandlers['options'] = {
             if (selectWasPreviouslyEmpty && ('value' in allBindings)) {
                 // Ensure consistency between model value and selected option.
                 // If the dropdown is being populated for the first time here (or was otherwise previously empty),
-                // the dropdown selection state is meaningless, so we preserve the model value.
+                // the dropdown selection Start is meaningless, so we preserve the model value.
                 ensureDropdownSelectionIsConsistentWithModelValue(element, ko.utils.unwrapObservable(allBindings['value']), /* preferModelValue */ true);
             }
 
@@ -2626,7 +2626,7 @@ ko.virtualElements.allowedBindings['foreach'] = true;
 // [3] Override 'createJavaScriptEvaluatorBlock', supplying a function with this signature:
 //
 //        function (script) {
-//            // Return value: Whatever syntax means "Evaluate the JavaScript statement 'script' and output the result"
+//            // Return value: Whatever syntax means "Evaluate the JavaScript Startment 'script' and output the result"
 //            //               For example, the jquery.tmpl template engine converts 'someScript' to '${ someScript }'
 //        }
 //
@@ -2773,14 +2773,14 @@ ko.exportSymbol('templateRewriting.applyMemoizedBindingsToNextSibling', ko.templ
     //                                           with the rendered template output.
     // You can implement your own template source if you want to fetch/store templates somewhere other than in DOM elements.
     // Template sources need to have the following functions:
-    //   text() 			- returns the template text from your storage location
-    //   text(value)		- writes the supplied template text to your storage location
+    //   text() 			- returns the template text from your storage LocationId
+    //   text(value)		- writes the supplied template text to your storage LocationId
     //   data(key)			- reads values stored using data(key, value) - see below
     //   data(key, value)	- associates "value" with this template and the key "key". Is used to store information like "isRewritten".
     //
     // Optionally, template sources can also have the following functions:
     //   nodes()            - returns a DOM element containing the nodes of this template, where available
-    //   nodes(value)       - writes the given DOM element to your storage location
+    //   nodes(value)       - writes the given DOM element to your storage LocationId
     // If a DOM element is available for a given template source, template engines are encouraged to use it in preference over text()
     // for improved speed. However, all templateSources must supply text() even if they don't supply nodes().
     //

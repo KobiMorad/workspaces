@@ -62,12 +62,16 @@
                         @Html.DisplayTextFor(m => item.Value.Longtitude)
                     </li>
                     <li>
-                         @Html.ActionLink("Remove", "RemoveFromCart", item.Key.LocationId);
+                        
+                        @{
+                            var locationId = item.Key.LocationId;
+                        }
+                        @Html.ActionLink("Remove", "RemoveFromCart","Locations", new {Id =locationId} )
                     </li>
                 </ul>
             </section>
-            @*            //<%= Ajax.ActionLink("Manage Users", "tabsUsers", null, new AjaxOptions { HttpMethod = "GET", UpdateTargetId = "ManageUsersPartial", InsertionMode = InsertionMode.Replace }, htmlAttributes: new { data_target = "#tabs-users" })%> *@
-            @Ajax.ActionLink("Remove","RemoveFromCart","locations" ,item.Key.LocationId,new AjaxOptions(){UpdateTargetId = "t"})
+
+            @Ajax.ActionLink("Remove","RemoveFromCart","locations" ,new {Id =locationId},new AjaxOptions())
 
         </h2>
     }

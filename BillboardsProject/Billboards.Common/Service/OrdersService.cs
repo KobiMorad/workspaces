@@ -91,33 +91,27 @@ namespace Billboards.Common.Service
             if (_carts.TryGetValue(userId, out userOrders))
             {
                 var wasRemoved = false;
-                try
+
+                if (string.IsNullOrEmpty(locationId))
                 {
-                    if (string.IsNullOrEmpty(locationId))
+                    RemoveFromUserFromCart(userId, out userOrders);
+                    wasRemoved = true;
+                }
+                else
+                {
+                    var orderDetail = userOrders.FirstOrDefault(p => p.LocationId == locationId);
+                    if (orderDetail != null)
                     {
-                        RemoveFromUserFromCart(userId, out userOrders);
-                        wasRemoved = true;
-                    }
-
-
-                    var firstOrDefault = userOrders.FirstOrDefault(p => p.LocationId == locationId);
-                    if (firstOrDefault != null)
-                    {
-                        wasRemoved = userOrders.Remove(firstOrDefault);
-                    }
-
-                    if (userOrders.Count == 0)
-                    {
-                        RemoveFromUserFromCart(userId, out userOrders);
+                        _locationsService.SeAsTemporaryAvailable(orderDetail.LocationId);
+                        wasRemoved = userOrders.Remove(orderDetail);
                     }
                 }
-                finally
+
+                if (userOrders.Count == 0)
                 {
-                    if (userOrders != null)
-                    {
-                        userOrders.ForEach(p => _locationsService.SeAsTemporaryAvailable(p.LocationId));
-                    }
+                    _carts.TryRemove(userId, out  userOrders);
                 }
+
 
                 return wasRemoved;
 

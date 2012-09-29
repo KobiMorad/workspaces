@@ -18,24 +18,21 @@ namespace BillboardsProject.Controllers
     public class EmailManager
     {
         private const string EmailFrom = "morad.kobi@gmail.com";
-        public static void SendConfirmationEmail(string userName)
+        public static void SendConfirmationEmail(string userName, string confirmationGuid)
         {
-
-            var user = Membership.GetUser(userName);
-
-            var confirmationGuid = user.ProviderUserKey.ToString();
             var verifyUrl = HttpContext.Current.Request.Url.GetLeftPart
-               (UriPartial.Authority) + "/Account/Verify/" + confirmationGuid;
+                                (UriPartial.Authority) +
+                            "/Account/Verify/" + confirmationGuid;
 
             using (var client = new SmtpClient())
             {
                 using (var message = new MailMessage(EmailFrom, EmailFrom)) // user.Email
                 {
                     message.Subject = "Please Verify your Account";
-                    message.Body = "<html><head><meta content=\"text/html; charset=utf-8\" /></head><body><p>Dear " + user.UserName +
+                    message.Body = "<html><head><meta content=\"text/html; charset=utf-8\" /></head><body><p>Dear " + userName +
                             ", </p><p>To verify your account, please click the following link:</p>"
                             + "<p><a href=\"" + verifyUrl + "\" target=\"_blank\">" + verifyUrl + ""
-                            + "</a></p><div>Best regards,</div><div>Someone</div><p>Do not forward "
+                            + "</a></p><div>Best regards,</div><div>GeoVocal</div><p>Do not forward "
                             + "this email. The verify link is private.</p></body></html>";
 
                     message.IsBodyHtml = true;
@@ -45,6 +42,7 @@ namespace BillboardsProject.Controllers
                 };
             };
         }
+      
     }
 
 
@@ -71,7 +69,7 @@ namespace BillboardsProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            var login = WebSecurity.Login(model.UserName, model.Password, false);
+            var login = WebSecurity.Login(model.UserName, model.Password, model.RememberMe);
 
             if (ModelState.IsValid && login)
             {
@@ -112,9 +110,10 @@ namespace BillboardsProject.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            MembershipCreateStatus createStatus = MembershipCreateStatus.Success;
+          
             if (ModelState.IsValid)
             {
+                var createStatus = MembershipCreateStatus.Success;
                 // Attempt to register the user
 
                 var result = WebSecurity.CreateUserAndAccount(model.UserName, model.Password, null, true);
@@ -122,7 +121,7 @@ namespace BillboardsProject.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
-                    EmailManager.SendConfirmationEmail(model.UserName);
+                    EmailManager.SendConfirmationEmail(model.UserName, result);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -180,36 +179,19 @@ namespace BillboardsProject.Controllers
             return View();
         }
 
-
-        public ActionResult Verify()
+        [AllowAnonymous]        
+        public ActionResult Verify(string id)
         {
-            //            if (string.IsNullOrEmpty(id) || (!Regex.IsMatch(id, @"[0-9a-f]{8}\-
-            //                                     ([0-9a-f]{4}\-){3}[0-9a-f]{12}")))
-            //            {
-            //                ViewBag.Msg = "Not Good!!!";
-            //                return null;
-            //            }
-            //
-            //            else
-            //            {
-            //                var user = Membership.GetUser(new Guid(id));
-            //
-            //                if (!user.IsApproved)
-            //                {
-            //                    user.IsApproved = true;
-            //                    Membership.UpdateUser(user);
-            //                    FormsAuthentication.SetAuthCookie(user.UserName, false);
-            //                    return RedirectToAction("Index", "Home");
-            //                }
-            //                else
-            //                {
-            //                    FormsAuthentication.SignOut();
-            //                    ViewBag.Msg = "Account Already Approved";
-            //                    return RedirectToAction("Login");
-            //                }
-            //            };
+        
+            var confirmAccount = WebSecurity.ConfirmAccount(id);
+        
+            if (confirmAccount)
+            {
+                return RedirectToAction("Login");
+            }
 
-            return null;
+            ModelState.AddModelError("", "Verify failed.");
+            return View("Register");
         }
 
         //

@@ -51,12 +51,12 @@ namespace BillboardsProject.Controllers
             if (ModelState.IsValid)
             {
                 var name = User.Identity.Name;
-                var succuess =
-                    await
-                    _ordersService.AddToCartAsync(name, location.Id,
-                                                  new OrderDetail()
-                                                      {Start = DateTime.Now, End = DateTime.Now + TimeSpan.FromDays(10)});
-                return RedirectToAction("ShowAll");
+                var succuess =await _ordersService.AddToCartAsync(name, location.Id,new OrderDetail() {Start = DateTime.Now, End = DateTime.Now + TimeSpan.FromDays(10)});
+                if (succuess == false)
+                {
+                    ModelState.AddModelError("Cart", "could't add location to cart");
+                }
+                return RedirectToAction("Cart");
             }   
             return null;
         }
@@ -88,18 +88,23 @@ namespace BillboardsProject.Controllers
             return null;
         }
 
+        
         public ActionResult RemoveFromCart(string id)
-        {
-            _ordersService.RemoveFromCart(string.Empty);
+        {       
             if (ModelState.IsValid)
             {
-                var name = User.Identity.Name;
-                List<OrderDetail> carts;
-                IEnumerable<KeyValuePair<OrderDetailViewModel, LocationViewModel>> orderDetailViewModels;
+                if (string.IsNullOrEmpty(id) == false)
+                {
+                    _ordersService.RemoveFromCart(User.Identity.Name, id);
 
-                orderDetailViewModels = new List<KeyValuePair<OrderDetailViewModel, LocationViewModel>>();
+                    var name = User.Identity.Name;
+                    List<OrderDetail> carts;
+                    IEnumerable<KeyValuePair<OrderDetailViewModel, LocationViewModel>> orderDetailViewModels;
 
-                return View("Cart", orderDetailViewModels);
+                    orderDetailViewModels = new List<KeyValuePair<OrderDetailViewModel, LocationViewModel>>();
+
+                    return View("Cart", orderDetailViewModels);
+                }
 
             }
             return null;

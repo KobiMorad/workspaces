@@ -88,7 +88,7 @@ namespace BillboardsProject.Models
         public string ConfirmPassword { get; set; }
 
         [DataType(DataType.EmailAddress)]
-        [Required]
+       // [Required]
         public string Email { get; set; }
     }
 
